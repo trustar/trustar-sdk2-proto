@@ -1,9 +1,9 @@
 from __future__ import unicode_literals
 
-from model_base import Base
-from model_entity import Entity
-from base import fluent
-from trustar_enums import ObservableTypes
+from .model_base import Base
+from .model_entity import Entity
+from .base import fluent
+from .trustar_enums import ObservableTypes
 
 
 @fluent

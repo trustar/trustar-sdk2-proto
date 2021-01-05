@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
-from base import fluent, Methods, Params, Param, get_timestamp
-from query import Query
+from .base import fluent, Methods, Params, Param, get_timestamp
+from .query import Query
 
 
 class SubmissionsParamSerializer(Params):
@@ -119,11 +119,11 @@ class Submission(object):
 
     @property
     def query_params(self):
-        return {
-            p.key: p.value
-            for p in self.params
-            if p in ("id", "enclaveId", "includeContent")
-        }
+        params = {}
+        for p in self.params:
+            if p in ("id", "enclaveId", "includeContent"):
+                params[p.key] = p.value
+        return params
 
     def create_query(self, method):
         """Returns a new instance of a Query object according config, endpoint and method."""

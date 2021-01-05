@@ -2,10 +2,10 @@ from __future__ import absolute_import
 import json
 from os import name
 
-from indicators import SearchIndicator
-from submission import Submission
-from trustar_enums import TruStarUrls
-from version import __version__
+from .indicators import SearchIndicator
+from .submission import Submission
+from .trustar_enums import TruStarUrls
+from .version import __version__
 
 
 class TruStar:

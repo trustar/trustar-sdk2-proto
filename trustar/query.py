@@ -1,5 +1,5 @@
-from api_client import ApiClient
-from base import Param, fluent
+from .api_client import ApiClient
+from .base import Param, fluent
 
 
 @fluent

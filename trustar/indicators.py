@@ -1,9 +1,9 @@
 from __future__ import unicode_literals
-from base import fluent, Methods, Params, Param, get_timestamp
+from .base import fluent, Methods, Params, Param, get_timestamp
 
-from query import Query
-from trustar_enums import ObservableTypes, SortColumns, AttributeTypes
-from trustar_models import Entity
+from .query import Query
+from .trustar_enums import ObservableTypes, SortColumns, AttributeTypes
+from .trustar_models import Entity
 
 
 class SearchIndicatorParamSerializer(Params):
