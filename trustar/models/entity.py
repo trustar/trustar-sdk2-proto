@@ -33,13 +33,13 @@ class Entity(Base):
 
     def set_valid_from(self, valid_from):
         if not isinstance(valid_from, int):
-            valid_from = get_timestamp(valid_from)
+            raise AttributeError("timestamp must be an int")
 
         self.set_custom_param("validFrom", valid_from)
 
     def set_valid_to(self, valid_to):
         if not isinstance(valid_to, int):
-            valid_to = get_timestamp(valid_to)
+            raise AttributeError("timestamp must be an int")
         self.set_custom_param("validTo", valid_to)
 
     def set_confidence_score(self, confidence_score):

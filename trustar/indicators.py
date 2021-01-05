@@ -8,8 +8,10 @@ from .models import Entity
 
 class SearchIndicatorParamSerializer(Params):
     def serialize(self):
-        return {n.key: n.value for n in self}
-
+        serialized = {}
+        for n in self:
+            serialized[n.key] = n.value
+        return serialized
 
 @fluent
 class SearchIndicator:
@@ -89,12 +91,12 @@ class SearchIndicator:
 
     def set_from(self, from_date):
         if not isinstance(from_date, int):
-            from_date = get_timestamp(from_date)
+            raise AttributeError("timestamp must be an int")
         self.set_custom_param("from", from_date)
 
     def set_to(self, to_date):
         if not isinstance(to_date, int):
-            to_date = get_timestamp(to_date)
+            raise AttributeError("timestamp must be an int")
 
         self.set_custom_param("to", to_date)
 

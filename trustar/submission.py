@@ -6,7 +6,10 @@ from .query import Query
 
 class SubmissionsParamSerializer(Params):
     def serialize(self):
-        return {n.key: n.value for n in self}
+        serialized = {}
+        for n in self:
+            serialized[n.key] = n.value
+        return serialized
 
 
 @fluent
@@ -102,7 +105,7 @@ class Submission(object):
         :returns: self.
         """
         if not isinstance(timestamp, int):
-            timestamp = get_timestamp(timestamp)
+            raise AttributeError("timestamp must be an int")
 
         self.set_custom_param("timestamp", timestamp)
 

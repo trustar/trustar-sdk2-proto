@@ -2,13 +2,10 @@ from __future__ import absolute_import
 import json
 from os import name
 
-from .log import get_logger
 from .indicators import SearchIndicator
 from .submission import Submission
 from .trustar_enums import TruStarUrls
 from .version import __version__
-
-logger = get_logger(__name__)
 
 
 class TruStar:

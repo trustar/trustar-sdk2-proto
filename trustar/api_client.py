@@ -3,11 +3,6 @@ import requests
 from requests.exceptions import HTTPError
 import time
 
-from .log import get_logger
-
-
-logger = get_logger(__name__)
-
 
 class ApiClient(object):
     """
@@ -35,7 +30,6 @@ class ApiClient(object):
         """
         Refreshes oauth token.
         """
-        logger.debug("Authenticating")
         client_auth = requests.auth.HTTPBasicAuth(
             self.config.api_key, self.config.api_secret
         )
@@ -144,7 +138,6 @@ class ApiClient(object):
         :returns: True or False indicating if it is necessary to keep trying.
         """
         wait_time = ceil(response.json().get("waitTime") / 1000)
-        logger.debug("Waiting {} seconds until next request allowed.".format(wait_time))
         keep_trying = wait_time <= self.config.request_details.get("max_wait_time")
         if keep_trying:
             time.sleep(wait_time)
