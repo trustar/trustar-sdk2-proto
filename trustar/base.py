@@ -1,6 +1,5 @@
 from collections import namedtuple
 from datetime import datetime
-import pytz
 import functools
 import inspect
 
@@ -8,8 +7,7 @@ from enum import Enum
 
 
 def get_timestamp(date):
-    timestamp = (date - datetime(1970, 1, 1, tzinfo=pytz.UTC)).total_seconds()
-    return int(timestamp)
+    return int(date)
 
 
 class Methods(Enum):

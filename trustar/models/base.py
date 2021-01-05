@@ -26,11 +26,11 @@ class Base(object):
         return attribute_value
 
     def serialize(self):
-        return {self._get_camelcase(k): self._get_serialized_attribute(v)
-                for k, v in self.__dict__.items()
-                if v is not None
-                }
-
+        serialized = {}
+        for k, v in self.__dict__.items():
+            if v is not None:
+                serialized[self._get_camelcase(k)] = self._get_serialized_attribute(v)
+        return serialized
 
 class Entity(Base):
 

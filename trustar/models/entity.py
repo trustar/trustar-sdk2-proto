@@ -1,13 +1,16 @@
 from __future__ import unicode_literals
 
-from .base import Base
+from base import Base
 from trustar.base import fluent, Params, Param, get_timestamp
 from trustar.trustar_enums import AttributeTypes, ObservableTypes
 
 
 class EntitySerializer(Params):
     def serialize(self):
-        return {n.key: n.value for n in self}
+        serialized = {}
+        for n in self:
+            serialized[n.key] = n.value
+        return serialized
 
 
 @fluent
