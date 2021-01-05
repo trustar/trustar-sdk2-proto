@@ -101,7 +101,7 @@ def test_set_raw_content(submission):
     assert params[0] == "RAW CONTENT"
 
 
-@pytest.mark.parametrize("date", [1583960400, "2020-03-11T21:00:00"])
+@pytest.mark.parametrize("date", [1583960400])
 def test_set_timestamp(submission, date):
     submission.set_timestamp(date)
     assert submission.params.get("timestamp") == 1583960400

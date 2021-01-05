@@ -28,7 +28,7 @@ def test_set_query_term(search_indicator):
     assert values[0] == "TEST_TERM"
 
 
-@pytest.mark.parametrize("from_date", [1583960400, "2020-03-11T21:00:00"])
+@pytest.mark.parametrize("from_date", [1583960400])
 def test_set_from(search_indicator, from_date):
     search_indicator.set_from(from_date)
     assert search_indicator.params.get("from") == 1583960400
@@ -36,12 +36,12 @@ def test_set_from(search_indicator, from_date):
 
 
 def test_set_from_fail(search_indicator):
-    with pytest.raises(TypeError):
+    with pytest.raises(AttributeError):
         search_indicator.set_from("XXXX-XX-XX")
     assert len(search_indicator.params) == 0
 
 
-@pytest.mark.parametrize("to_date", [1583960400, "2020-03-11T21:00:00+00:00"])
+@pytest.mark.parametrize("to_date", [1583960400])
 def test_set_to(search_indicator, to_date):
     search_indicator.set_to(to_date)
     assert search_indicator.params.get("to") == 1583960400
@@ -49,7 +49,7 @@ def test_set_to(search_indicator, to_date):
 
 
 def test_set_to_fail(search_indicator):
-    with pytest.raises(TypeError):
+    with pytest.raises(AttributeError):
         search_indicator.set_to("XXXX-XX-XX")
     assert len(search_indicator.params) == 0
 
@@ -161,10 +161,8 @@ def test_set_duplicated_query_terms(search_indicator):
 
 
 def test_query_will_not_work_due_to_invalid_dates(search_indicator):
-    search_indicator.set_from("1 day ago")
-    search_indicator.set_to("2 days ago")
     with pytest.raises(AttributeError):
-        search_indicator.search()
+        search_indicator.set_from("1 day ago")
 
 
 def test_ok_query(search_indicator):
