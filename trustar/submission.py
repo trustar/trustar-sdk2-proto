@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
-from .base import fluent, Methods, Params, Param, get_timestamp
-from .query import Query
+from base import fluent, Methods, Params, Param, get_timestamp
+from query import Query
 
 
 class SubmissionsParamSerializer(Params):
