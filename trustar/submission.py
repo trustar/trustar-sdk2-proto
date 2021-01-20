@@ -90,6 +90,15 @@ class Submission(object):
             tags = []
         self.set_custom_param("tags", tags)
 
+    def set_id_type_as_external(self, external=False):
+        """Sets idType to EXTERNAL if 'external' parameter is True.
+        
+        :param external: boolean indicating if id is external or not
+        :returns: self.
+        """
+        if external:
+            self.set_custom_param("idType", "EXTERNAL")
+
     def set_include_content(self, content=False):
         """
         Adds includeContent param to set of params.
@@ -131,8 +140,12 @@ class Submission(object):
         return {
             p.key: p.value
             for p in self.params
-            if p.key in ("id", "enclaveGuid", "includeContent")
+            if p.key in ("id", "idType", "enclaveGuid", "includeContent")
         }
+
+    def get_by_external_id(self):
+        """Returns True if params are set to retrieve a submission by external id"""
+        return "idType" in self.params and "externalId" in self.params
 
     def create_query(self, method):
         """Returns a new instance of a Query object according config, endpoint and method."""
@@ -155,9 +168,13 @@ class Submission(object):
 
     def get(self):
         """Retrieves a submission according to query_params set before."""
+        query_string = self.query_params
+        if self.get_by_external_id():
+            query_string["id"] = self.params.get("externalId")
+
         return (
             self.create_query(Methods.GET)
-            .set_query_string(self.query_params)
+            .set_query_string(query_string)
             .fetch_one()
         )
 
